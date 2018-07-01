@@ -76,8 +76,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MainViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="Controls\WizardUserControl.xaml.cs">
+      <DependentUpon>WizardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizard.cs" />
+    <Compile Include="WizardViewModel.cs" />
+    <Page Include="Controls\WizardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

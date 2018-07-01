@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Trans.Controls.WizardUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone Grid.Row="0" Mode="PrimaryMid">
+            <StackPanel Margin="8" materialDesign:RippleAssist.IsCentered="True" materialDesign:RippleAssist.RippleSizeMultiplier="0.75">
+                <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignToolButton}">
+                    <materialDesign:PackIcon Kind="Close" Width="22" Height="22" Foreground="{StaticResource PrimaryHueMidForegroundBrush}"/>
+                </Button>
+                <TextBlock Text="{Binding Description}" Margin="8,16,8,8" Style="{StaticResource MaterialDesignTitleTextBlock}"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <materialDesign:TransitioningContent Grid.Row="1" Background="{StaticResource MaterialDesignPaper}" OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.7}">
+            <Grid>
+                <materialDesign:Transitioner ItemsSource="{Binding DynamicQuestions}" SelectedIndex="{Binding SlideIndex}">
+                    <!--<TextBlock Text="Page 1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Page 2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Page 3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Page 4" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+                    <materialDesign:Transitioner.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Margin="16" Style="{StaticResource MaterialDesignSubheadingTextBlock}"/>
+                                <ItemsControl ItemsSource="{Binding Choices}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Margin="36,16,0,0"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <RadioButton Content="{Binding Text}" IsChecked="{Binding IsSelected}" GroupName="A" Margin="0,0,0,16"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </materialDesign:Transitioner.ItemTemplate>
+                </materialDesign:Transitioner>
+                <Grid VerticalAlignment="Bottom" Margin="16">
+                    <Button Command="{Binding CommandPreviousSlide}" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}">
+                        <materialDesign:PackIcon Kind="ChevronLeft"/>
+                    </Button>
+                    <Button Command="{Binding CommandNextSlide}" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>NEXT</TextBlock>
+                            <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center" Margin="4,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>
